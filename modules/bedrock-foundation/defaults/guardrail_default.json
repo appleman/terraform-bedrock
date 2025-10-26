@@ -1,0 +1,75 @@
+{
+  "blocked_input_messaging": "⚠️ Input content violates policy.",
+  "blocked_outputs_messaging": "⚠️ Output content blocked by safety policy.",
+  
+  "content_policy_config": {
+    "filters_config": [
+      { "type": "HATE", "input_strength": "MEDIUM", "output_strength": "MEDIUM" },
+      { "type": "SEXUAL", "input_strength": "MEDIUM", "output_strength": "MEDIUM" },
+      { "type": "VIOLENCE", "input_strength": "MEDIUM", "output_strength": "MEDIUM" }
+    ],
+    "tier_config": { "tier_name": "STANDARD" }
+  },
+
+  "sensitive_information_policy_config": {
+    "pii_entities_config": [
+      {
+        "action": "BLOCK",
+        "input_action": "BLOCK",
+        "output_action": "ANONYMIZE",
+        "input_enabled": true,
+        "output_enabled": true,
+        "type": "NAME"
+      }
+    ],
+    "regexes_config": [
+      {
+        "action": "BLOCK",
+        "input_action": "BLOCK",
+        "output_action": "BLOCK",
+        "input_enabled": true,
+        "output_enabled": false,
+        "description": "SSN regex",
+        "name": "regex_ssn",
+        "pattern": "^\\d{3}-\\d{2}-\\d{4}$"
+      }
+    ]
+  },
+
+  "topic_policy_config": {
+    "topics_config": [
+      {
+        "name": "financial_advice",
+        "type": "DENY",
+        "definition": "Blocks investment-related queries",
+        "examples": ["Should I buy stocks?", "Where to invest money?"]
+      },
+      {
+        "name": "investment_topic",
+        "examples": ["Where should I invest my money?"],
+        "type": "DENY",
+        "definition": "Investment advice refers to inquiries, guidance, or recommendations regarding the management or allocation of funds or assets with the goal of generating returns."
+      }
+    ],
+    "tier_config": {
+      "tier_name": "CLASSIC"
+    }
+  },
+
+  "word_policy_config": {
+    "managed_word_lists_config": [
+      { "type": "PROFANITY" }
+    ],
+    "words_config": [
+      { "text": "HATE" }
+    ]
+  },
+
+  "contextual_grounding_policy_config": {
+    "policies_config": [
+      { "type": "RELEVANCE", "threshold": "MEDIUM" },
+      { "type": "HALLUCINATION", "threshold": "MEDIUM" },
+      { "type": "FACT_CHECK", "threshold": "MEDIUM" }
+    ]
+  }
+}
